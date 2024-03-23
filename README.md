@@ -10,6 +10,7 @@ to make sure it makes sense.
 
 TODO: Install the following onto your fork.
 
-1. Install [node.js](https://nodejs.org/en/download/) and then using `npm i`:
-2. Install [expo](https://docs.expo.dev/get-started/installation/) and install the Expo Go app on your phone.
-3. Install [React Native](https://reactnative.dev/docs/environment-setup)
+1. Install [node.js](https://nodejs.org/en/download/) and then using `npm i` once inside your fork:
+     - `npm i -g npx`
+     - `npx create-expo-app OSC-MiniHack2024-App`
+     - `npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar @react-native-async-storage/async-storage`
