@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.8",
-    "@react-navigation/native": "^6.1.7",
-    "@react-navigation/stack": "^6.3.17",
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/stack": "^6.3.29",
     "@types/d3-shape": "^3.1.2",
     "d3-shape": "^3.2.0",
     "expo": "~49.0.8",
