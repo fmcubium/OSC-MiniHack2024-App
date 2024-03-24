@@ -4,7 +4,7 @@ import { StyleSheet, View,  } from 'react-native';
 import Card from '../clubCard';
 import clubData from '../../data/clubData';
 import AnimatedStack from '../animatedCard/animatedCardIndex';
-
+import { yesClubs } from '../../data/yesClubs';
 
 export default function Main() {
     
@@ -16,10 +16,11 @@ export default function Main() {
         console.log(club)
     }
     const onSwipeRight = (club) => {
-        console.log("swipe right", club.name)
-        club.status = "Like"
-        console.log(club.status)
-        console.log(club)
+        console.log("swipe right", club.name);
+        club.status = "Like";
+        yesClubs.push(club); // Add the club to yesClubs
+        console.log(club.status);
+        console.log(club);
     }
     return (
 

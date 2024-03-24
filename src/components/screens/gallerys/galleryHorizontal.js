@@ -5,7 +5,7 @@ import clubData from '../../../data/clubData';
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import { yesClubs } from '../../../data/yesClubs';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,6 +17,7 @@ const Stack = createStackNavigator();
 
 const GalleryHorizontal = () => {
     const [activeIndex, setActiveIndex] = useState(0);
+    
 
 
     const handleOnScroll = (event) => {
@@ -57,7 +58,7 @@ const GalleryHorizontal = () => {
                 snapToInterval={SCREEN_WIDTH}
                 snapToAlignment='center'
                 pagingEnabled
-                data={clubData}
+                data={yesClubs}
                 onScroll={handleOnScroll}
                 scrollEventThrottle={0}
                 renderItem={({ item }) => {
