@@ -2,12 +2,13 @@
 import { StyleSheet, View, Text, useWindowDimensions, Image,  Dimensions } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import clubData from '../../../data/clubData';
+import { getYesClubs } from '../../../actions/getYesClubs';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 export default function GallaryVericle() {
   return (
     <View>
       <FlatList
-        data={clubData}
+        data={getYesClubs()}
         renderItem={({ item }) => {
           return (
             <View style={{ ...styles.container, width: SCREEN_WIDTH }}>
