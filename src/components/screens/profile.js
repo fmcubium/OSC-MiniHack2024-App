@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, FlatList, Dimensions, Pressable } from 'react-native';
+import { StyleSheet, View, Text, Image, FlatList, Dimensions, Pressable, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Profile() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [newTag, setNewTag] = useState('');
+  const [tags, setTags] = useState([
+    'Software Development',
+    'Programming',
+    'Professional Development',
+    'Asian',
+    'Inclusivity',
+    'Diversity',
+    'Technical',
+  ]);
 
   const handleOnScroll = (event) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
@@ -13,80 +23,83 @@ export default function Profile() {
     setActiveIndex(indexFixed);
   };
 
-  const Button = (props) => {
-    const { onPress, title = 'Save' } = props;
-    return (
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={styles.text}>{title}</Text>
-      </Pressable>
-    );
+  const addTag = () => {
+    if (newTag.trim() !== '') {
+      setTags([...tags, newTag]);
+      setNewTag('');
+    }
   };
 
   const handleButtonPress = () => {
-    alert('Upgrading');
+    addTag();
   };
 
-  // Hardcoded tags based on club descriptions
-  const tags = [
-    'Software Development',
-    'Programming',
-    'Professional Development',
-    'Asian',
-    'Inclusivity',
-    'Diversity',
-    'Technical',
-  ];
-
   return (
-    <View style={{ backgroundColor: 'white', height: '100%', justifyContent: 'space-between' }}>
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <View style={{ ...styles.imageContainer, justifyContent: 'center', alignItems: 'center' }}>
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      <View style={styles.profileContainer}>
+        <View style={styles.imageContainer}>
           <Image source={require('../../images/clubProfile.jpg')} style={styles.image} />
         </View>
         <Text style={styles.profileText}>Kovidh Gandreti</Text>
-        <Text style={styles.year}>1st Year: Computer Science</Text>
       </View>
-      <View>
+      <View style={styles.addTagContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Add Tag"
+          value={newTag}
+          onChangeText={(text) => setNewTag(text)}
+        />
+        <Pressable style={[styles.addButton, { backgroundColor: 'orange' }]} onPress={handleButtonPress}>
+          <Text style={styles.buttonText}>Add Tag</Text>
+        </Pressable>
+      </View>
+      <View style={styles.tagsContainer}>
         <Text style={styles.title}>Tags</Text>
-        <View style={styles.tagsContainer}>
+        <View style={styles.tags}>
           {tags.map((tag, index) => (
-            <Text key={index} style={styles.tag}>
-              {tag}
-            </Text>
+            <View key={index} style={styles.tagContainer}>
+              <Text style={styles.tag}>{tag}</Text>
+            </View>
           ))}
         </View>
       </View>
-      <View style={{ alignItems: 'center', marginBottom: 20 }}>
-        <View style={{ width: SCREEN_WIDTH }}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            snapToInterval={SCREEN_WIDTH}
-            snapToAlignment="center"
-            pagingEnabled
-            onScroll={handleOnScroll}
-            scrollEventThrottle={0}
-            contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
-            data={['item1', 'item2', 'item3']} // Add your data here
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <View style={{ width: SCREEN_WIDTH, justifyContent: 'center', alignItems: 'center' }}>
-                {/* Your content for each item */}
-              </View>
-            )}
-          />
-        </View>
+      <View style={styles.flatListContainer}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          snapToInterval={SCREEN_WIDTH}
+          snapToAlignment="center"
+          pagingEnabled
+          onScroll={handleOnScroll}
+          scrollEventThrottle={0}
+          contentContainerStyle={styles.flatListContent}
+          data={['item1', 'item2', 'item3']} // Add your data here
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.flatListItem}>
+              {/* Your content for each item */}
+            </View>
+          )}
+        />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  profileContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 30,
+  },
   imageContainer: {
-    marginTop: 10,
     width: 180,
     height: 180,
-    borderRadius: 150,
+    borderRadius: 90,
     borderWidth: 3,
     borderColor: '#000AFF',
     overflow: 'hidden',
@@ -105,39 +118,67 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  button: {
+  addTagContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 5,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: '#000AFF',
+    marginTop: 10,
+    marginBottom: 10,
   },
-  text: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
+  input: {
+    flex: 1,
+    borderWidth: 2,
+    borderColor: '#000AFF',
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    marginRight: 10,
+  },
+  addButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+  },
+  buttonText: {
     color: 'white',
+    fontWeight: 'bold',
   },
   tagsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginTop: 10,
-  },
-  tag: {
-    margin: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#000AFF',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 20,
+    marginBottom: 10,
+  },
+  tags: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  tagContainer: {
+    margin: 5,
+  },
+  tag: {
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 20,
+    backgroundColor: '#000AFF',
+    color: 'white',
+  },
+  flatListContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  flatListContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
+  flatListItem: {
+    width: SCREEN_WIDTH,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

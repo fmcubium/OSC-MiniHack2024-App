@@ -1,44 +1,67 @@
 import React from 'react';
-import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
 import { yesClubs } from '../../../data/yesClubs';
 
-const Button = (props) => {
-    const { onPress, title = 'Save' } = props;
+export default function Announcement() {
+  const renderAnnouncement = ({ item }) => {
     return (
-        <Pressable style={styles.button} onPress={onPress}>
-            <Text style={styles.text}>{title}</Text>
-        </Pressable>
-    );
-}
-export default function AddImage(props) {
-    const handleButtonPress = () => {
-        alert('Importing');
-    };
-    return (
-        <View style={styles.container}>
-          <View style={styles.buttonContainer}>
-            <Button onPress={handleButtonPress} title="Import Picture" />
-          </View>
+      <View style={styles.container}>
+        <Image source={item.image} style={styles.image} />
+        <View style={styles.announcementContainer}>
+          <Text style={styles.title}>{item.name}</Text>
+          <Text style={styles.date}>{item.announcement.date}</Text>
+          <Text style={styles.announcementTitle}>{item.announcement.title}</Text>
+          <Text style={styles.announcementAbout}>{item.announcement.about}</Text>
         </View>
-      );
-    }
-    
-    const styles = StyleSheet.create({
-        button: {
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingVertical: 12,
-            paddingHorizontal: 32,
-            borderRadius: 4,
-            elevation: 3,
-            backgroundColor: 'black',
-          },
-          text: {
-            fontSize: 16,
-            lineHeight: 21,
-            fontWeight: 'bold',
-            letterSpacing: 0.25,
-            color: 'white',
-          },
-        });
+      </View>
+    );
+  };
+
+  return (
+    <FlatList
+      data={yesClubs}
+      renderItem={renderAnnouncement}
+      keyExtractor={(item) => item.id.toString()}
+    />
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    marginBottom: 20, // Add some margin between announcements
+  },
+  image: {
+    width: 200,
+    height: 200,
+    resizeMode: 'cover',
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  announcementContainer: {
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    textAlign: 'center', // Center the text
+  },
+  date: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  announcementTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  announcementAbout: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginHorizontal: 20,
+  },
+});
