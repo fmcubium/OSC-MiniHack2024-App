@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { rankPreferences } from '../../actions/rankPreferences';
 
 const Questionnaire = ({ onComplete }) => {
   const [major, setMajor] = useState('');
@@ -18,7 +17,6 @@ const Questionnaire = ({ onComplete }) => {
       // For simplicity, let's just check if major, interests, and about are not empty
       if (major.trim() !== '' && interests.trim() !== '' && about.trim() !== '') {
         // Call the onComplete function passed from the parent component
-        rankPreferences(major, interests, about);
         onComplete({ major, interests, about }); // Pass the entered data to the parent component
       } else {
         // Handle invalid input, show an error message, etc.

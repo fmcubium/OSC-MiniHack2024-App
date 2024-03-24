@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     backgroundColor: '#000AFF',
-    paddingTop: 20,
+    paddingTop: 30,
   },
   headerText: {
     fontSize: 30,
