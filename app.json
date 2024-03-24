@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "OSC-MiniHack2024-App",
-    "slug": "OSC-MiniHack2024-App",
+    "name": "osc-minihack2024-app",
+    "slug": "osc-minihack2024-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
