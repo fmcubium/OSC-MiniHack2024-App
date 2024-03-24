@@ -43,6 +43,7 @@ Additionally, install the following dependencies onto your fork:
     npm i -g npx
     npx create-expo-app OSC-MiniHack2024-App
     npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar @react-native-async-storage/async-storage
+    pip install torch torchtext spacy
 
 5. **How to Contribute**
    - Fork the repository.
