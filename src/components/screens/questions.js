@@ -29,7 +29,7 @@ const Questionnaire = ({ onComplete }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Questionnaire</Text>
+      <Text style={styles.heading}>AI/ML Questionnaire</Text>
       <TextInput
         style={styles.input}
         placeholder="Enter your major"

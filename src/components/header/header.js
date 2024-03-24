@@ -12,13 +12,12 @@ const Header = () => {
 
 }
 const styles = StyleSheet.create({
-
   header: {
     flex: 0,
     width: '100%',
     justifyContent: "flex-start",
     borderRadius: 30,
-
+    paddingTop: 20, // Adding padding to the top
   },
   headerText: {
     padding: 20,
