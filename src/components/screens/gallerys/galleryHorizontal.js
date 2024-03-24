@@ -110,12 +110,19 @@ const styles = StyleSheet.create({
     clubName: {
         fontSize: 30,
         color: 'white',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textShadowColor: '#000',
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 2,
     },
     clubBio: {
         fontSize: 18,
-        color: 'white'
+        color: 'white',
+        textShadowColor: '#000',
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 2,
     },
+    
     navigate: {
         flexDirection: "row",
         justifyContent: "space-between",

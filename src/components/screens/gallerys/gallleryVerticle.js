@@ -53,13 +53,19 @@ bioContainer: {
 
 },
 clubName: {
-    fontSize: 30,
-    color: 'white',
-    fontWeight: 'bold',
+  fontSize: 30,
+  color: 'white',
+  fontWeight: 'bold',
+  textShadowColor: '#000',
+  textShadowOffset: { width: 2, height: 2 },
+  textShadowRadius: 2,
 },
 clubBio: {
-    fontSize: 18,
-    color: 'white'
+  fontSize: 18,
+  color: 'white',
+  textShadowColor: '#000',
+  textShadowOffset: { width: 2, height: 2 },
+  textShadowRadius: 2,
 },
 
 
