@@ -36,7 +36,6 @@ Navigate to the project directory and run:
     
     expo start
 
-
 4. **Additional Dependencies**
 Additionally, install the following dependencies onto your fork:
 
