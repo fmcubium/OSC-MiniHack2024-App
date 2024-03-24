@@ -1,25 +1,35 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 
 const Questionnaire = ({ onComplete }) => {
   const [major, setMajor] = useState('');
   const [interests, setInterests] = useState('');
+  const [about, setAbout] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleComplete = () => {
-    // Here you can perform any necessary validation or processing of the questionnaire data
-    // For simplicity, let's just check if major and interests are not empty
-    if (major.trim() !== '' && interests.trim() !== '') {
-      // Call the onComplete function passed from the parent component
-      onComplete({ major, interests }); // Pass the entered data to the parent component
-    } else {
-      // Handle invalid input, show an error message, etc.
-      alert('Please fill out all fields.');
-    }
+    // Show loading animation
+    setLoading(true);
+
+    // Simulate a delay before completing the questionnaire
+    setTimeout(() => {
+      // Here you can perform any necessary validation or processing of the questionnaire data
+      // For simplicity, let's just check if major, interests, and about are not empty
+      if (major.trim() !== '' && interests.trim() !== '' && about.trim() !== '') {
+        // Call the onComplete function passed from the parent component
+        onComplete({ major, interests, about }); // Pass the entered data to the parent component
+      } else {
+        // Handle invalid input, show an error message, etc.
+        alert('Please fill out all fields.');
+      }
+      // Hide loading animation
+      setLoading(false);
+    }, 10000); // Adjust the timeout value as needed (in milliseconds)
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>College Major and Interests Questionnaire</Text>
+      <Text style={styles.heading}>Questionnaire</Text>
       <TextInput
         style={styles.input}
         placeholder="Enter your major"
@@ -31,8 +41,22 @@ const Questionnaire = ({ onComplete }) => {
         placeholder="Enter your interests"
         value={interests}
         onChangeText={text => setInterests(text)}
+        multiline
       />
-      <Button title="Submit" onPress={handleComplete} />
+      <TextInput
+        style={[styles.input, { height: 120 }]}
+        placeholder="Tell me about yourself"
+        value={about}
+        onChangeText={text => setAbout(text)}
+        multiline
+      />
+      <TouchableOpacity style={styles.button} onPress={handleComplete} disabled={loading}>
+        {loading ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.buttonText}>Submit to AI Model</Text>
+        )}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -45,18 +69,34 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   heading: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 30,
+    textAlign: 'center',
   },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
     marginBottom: 20,
     width: '100%',
+    fontSize: 16,
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    borderRadius: 8,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
