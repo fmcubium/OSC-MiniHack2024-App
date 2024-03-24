@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Image,Pressable } from 'react-native';
-import clubData from '../../../data/clubData';
+import { yesClubs } from '../../../data/yesClubs';
 export default function RemoveImage() {
     const Button = (props) => {
         const { onPress, title = 'Save' } = props;
@@ -11,13 +11,15 @@ export default function RemoveImage() {
           </Pressable>
         );
       }
-      const handleButtonPress = () => {
+      const handleButtonPress = (clubIdToRemove) => {
         alert('Deleting');
+        const updatedClubs = yesClubs.filter(club => club.id !== clubIdToRemove);
+        yesClubs = updatedClubs;
     };
     return (
         <View style={{ backgroundColor: "white", height: "100%" }}>
         <View style={styles.users}>
-        {clubData.map(club => (
+        {yesClubs.map(club => (
             <View style={styles.user} key={club.id}>
                 <Button onPress={handleButtonPress} title="Upgrade" />
                 {/* <Image source={require("../../../images/red-x.png")} style={styles.xMark}></Image> */}

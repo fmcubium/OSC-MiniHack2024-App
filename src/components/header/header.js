@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <SafeAreaView>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Org Linker</Text>
+        <Text style={styles.headerText}>SwampNet</Text>
       </View>
     </SafeAreaView>
   )

@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import clubData from '../../../data/clubData';
+import { yesClubs } from '../../../data/yesClubs';
 
 const Button = (props) => {
     const { onPress, title = 'Save' } = props;
